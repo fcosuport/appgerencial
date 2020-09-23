@@ -16,6 +16,26 @@
         </q-toolbar-title>
 
         <!--<div>Quasar v{{ $q.version }}</div>-->
+        <q-btn-dropdown color="primary" label="Francisco" unelevated>
+          <q-list>
+            <q-item clickable v-close-popup @click="onTrocarSenha">
+               <q-item-section>
+                 <q-avatar icon="vpn_key" color="primary" text-color="white" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label >Trocar Senha</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item clickable v-close-popup @click="onSair">
+              <q-item-section>
+                 <q-avatar icon="close" color="primary" text-color="white" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>Sair</q-item-label>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
       </q-toolbar>
     </q-header>
 
@@ -90,6 +110,13 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: linksData
     }
+  },
+  methods: {
+    onSair () {
+      sessionStorage.removeItem('appgerencial_token')
+      this.$router.replace('/login')
+    }
+
   }
 }
 </script>

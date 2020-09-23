@@ -7,7 +7,7 @@ const HttpClient = axios.create({
 })
 
 HttpClient.interceptors.request.use(config => {
-  const token = localStorage.getItem('appgerencial_token')
+  const token = sessionStorage.getItem('appgerencial_token')
 
   if (token) {
     config.headers.common.Authorization = `Bearer ${token}`

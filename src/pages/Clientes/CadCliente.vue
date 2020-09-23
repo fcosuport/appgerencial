@@ -302,7 +302,8 @@ export default {
       bloquearsistema: [
         { label: 'Não', value: 'N' },
         { label: 'Bloquear', value: 'B' },
-        { label: 'Atualizar', value: 'A' }
+        { label: 'Atualizar', value: 'A' },
+        { label: 'Cobrança', value: 'C' }
       ]
     }
   },

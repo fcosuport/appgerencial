@@ -29,13 +29,13 @@
             v-model="imputpesquisa"
             debounce="300"
             color="primary"
-            class="q-mr-md">
+            class="q-mr-sm">
           </q-input>
           <q-btn
             label="Pesquisar"
             icon="search"
             color="primary"
-            class="q-mr-md"
+            class="q-mr-sm"
             @click="getClientes"
           />
           <q-select
@@ -46,8 +46,8 @@
             :options="optionsRevenda"
             label="Revenda"
             :loading="loadingUsuarios"
-            style="width: 200px"
-            class="q-mr-md"
+            style="width: 150px"
+            class="q-mr-sm"
           >
           <template v-slot:append>
               <q-icon
@@ -65,9 +65,31 @@
             :options="optionsManutencao"
             map-options
             emit-value
+            label="Manutenção"
+            style="width: 120px"
+            class="q-mr-sm"
+          />
+          <q-select
+            outlined
+            dense
+            v-model="mensagem"
+            :options="optionsMensagem"
+            map-options
+            emit-value
+            label="Mensagem"
+            style="width: 120px"
+            class="q-mr-sm"
+          />
+          <q-select
+            outlined
+            dense
+            v-model="situacao"
+            :options="optionsSituacao"
+            map-options
+            emit-value
             label="Situação"
-            style="width: 180px"
-            class="q-mr-md"
+            style="width: 120px"
+            class="q-mr-sm"
           />
         </template>
 
@@ -146,19 +168,19 @@ export default {
       radiogroup: 'nome',
       radiooptions: [
         {
-          label: 'Pesquisar por Razão Social',
+          label: 'Razão Social',
           value: 'nome'
         },
         {
-          label: 'Pesquisar por Fantasia',
+          label: 'Fantasia',
           value: 'fantasia'
         },
         {
-          label: 'Pesquisar por CNPJ',
+          label: 'CNPJ',
           value: 'cnpj'
         },
         {
-          label: 'Pesquisar por Código',
+          label: 'Código',
           value: 'codigo'
         }
       ],
@@ -226,11 +248,24 @@ export default {
       loadingUsuarios: true,
       totalManutencao: 0,
       optionsManutencao: [
-        { label: 'Com Manutenção', value: 'T' },
-        { label: 'Sem Manutenção', value: 'F' },
-        { label: 'Todos', value: '' }
+        { label: 'Todos', value: '' },
+        { label: 'Sim', value: 'T' },
+        { label: 'Não', value: 'F' }
+      ],
+      optionsMensagem: [
+        { label: 'Todos', value: '' },
+        { label: 'Bloquear', value: 'B' },
+        { label: 'Atualizar', value: 'A' },
+        { label: 'Cobrança', value: 'C' }
+      ],
+      optionsSituacao: [
+        { label: 'Todos', value: '' },
+        { label: 'Ativos', value: 'F' },
+        { label: 'Inativos', value: 'T' }
       ],
       manutencao: '',
+      mensagem: '',
+      situacao: '',
       imputpesquisa: ''
     }
   },
@@ -241,7 +276,7 @@ export default {
   methods: {
     getClientes () {
       this.loading = true
-      this.$axios.get(`/clientes?${this.radiogroup}=${this.imputpesquisa}&manutencao=${this.manutencao}&cdrevenda=${this.revenda.value}`)
+      this.$axios.get(`/clientes?${this.radiogroup}=${this.imputpesquisa}&manutencao=${this.manutencao}&cdrevenda=${this.revenda.value}&bloquearsistema=${this.mensagem}&inativo=${this.situacao}`)
         .then((suc) => {
           this.clientes = suc.data.clientes
           this.totalManutencao = suc.data.totalmanutencao[0].totalmanutencao
