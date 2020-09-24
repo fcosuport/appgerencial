@@ -2,7 +2,15 @@
   <q-page class="container" padding>
     <p class="text-h5">
       <q-icon name="supervisor_account" class="text-primary" style="font-size: 1.3em;"/>
-      Lista de Clientes</p>
+      Lista de Clientes
+       <q-btn
+          color="primary"
+          icon="add_box"
+          label="Novo Cliente"
+          @click="cadastrarCliente"
+      />
+
+    </p>
 
     <div class="row">
       <div class="col-12">
@@ -34,7 +42,7 @@
           <q-btn
             label="Pesquisar"
             icon="search"
-            color="primary"
+            color="secondary"
             class="q-mr-sm"
             @click="getClientes"
           />
